@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { GraduationCap, Languages, MapPin, Sparkle } from 'lucide-react';
+import avatarPhoto from '../assets/gabriel-seibel.jpg';
 import { education, languages, profile, stats } from '../config/profile';
 import CountUp from './CountUp';
 import Reveal from './Reveal';
@@ -34,10 +35,14 @@ export default function About() {
                 <div className="absolute inset-[3px] rounded-[1.65rem] bg-(--bg)" />
               </div>
               <div className="glass relative flex h-full w-full items-center justify-center overflow-hidden rounded-[1.75rem]">
-                <div className="pointer-events-none absolute inset-0 bg-grid opacity-40 transition-transform duration-700 ease-out group-hover:scale-110" />
-                <span className="font-display text-8xl font-semibold text-gradient transition-transform duration-500 ease-out group-hover:scale-105">
-                  {profile.avatarInitials}
-                </span>
+                <img
+                  src={avatarPhoto}
+                  alt={`Foto de ${profile.name}`}
+                  className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                  loading="lazy"
+                  width={800}
+                  height={1000}
+                />
               </div>
             </div>
 

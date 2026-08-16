@@ -40,8 +40,9 @@ export default function About() {
                   alt={`Foto de ${profile.name}`}
                   className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
                   loading="lazy"
-                  width={800}
-                  height={1000}
+                  decoding="async"
+                  width={640}
+                  height={640}
                 />
               </div>
             </div>

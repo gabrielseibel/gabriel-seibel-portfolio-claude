@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Página não encontrada — Gabriel Seibel</title>
+    <meta name="description" content="A página que você procura não existe ou foi movida." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0a0a10;
+        --surface: #13131d;
+        --border: rgb(255 255 255 / 0.1);
+        --text-primary: #f5f4f2;
+        --text-secondary: rgb(245 244 242 / 0.64);
+        --violet: #8b5cf6;
+        --cyan: #22d3ee;
+        --amber: #f59e0b;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .glow {
+        position: absolute;
+        width: 32rem;
+        height: 32rem;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: 0.25;
+        pointer-events: none;
+      }
+      .glow--violet { top: -8rem; left: -8rem; background: var(--violet); }
+      .glow--cyan { bottom: -8rem; right: -8rem; background: var(--cyan); }
+      main {
+        position: relative;
+        text-align: center;
+        max-width: 30rem;
+      }
+      .code {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: clamp(4.5rem, 20vw, 7rem);
+        line-height: 1;
+        letter-spacing: -0.02em;
+        background: linear-gradient(120deg, var(--violet), var(--cyan) 55%, var(--amber));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin: 0;
+      }
+      h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin: 0.75rem 0 0.5rem;
+      }
+      p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0 0 2rem;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+      a.btn {
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.85rem 1.5rem;
+        border-radius: 999px;
+        transition: transform 0.2s ease;
+      }
+      a.btn:hover, a.btn:focus-visible { transform: translateY(-2px); }
+      a.btn.primary {
+        background: var(--text-primary);
+        color: var(--bg);
+      }
+      a.btn.secondary {
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+        background: rgb(255 255 255 / 0.04);
+      }
+      :focus-visible {
+        outline: 2px solid var(--violet);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow--violet" aria-hidden="true"></div>
+    <div class="glow glow--cyan" aria-hidden="true"></div>
+    <main>
+      <p class="code" aria-hidden="true">404</p>
+      <h1>Esta página não existe.</h1>
+      <p>
+        O endereço <code id="path-display"></code> não foi encontrado. Ele pode ter mudado
+        ou nunca ter existido.
+      </p>
+      <div class="actions">
+        <a id="home-link" class="btn primary" href="/">Voltar ao início</a>
+        <a id="contact-link" class="btn secondary" href="/#contato">Entrar em contato</a>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        // Reconstrói o caminho-base do site (funciona em GitHub Pages de
+        // projeto, ex. usuario.github.io/repo/, e em domínio próprio)
+        var segments = location.pathname.split('/').filter(Boolean);
+        var isGithubIo = location.hostname.endsWith('github.io');
+        var base = isGithubIo && segments.length > 0 ? '/' + segments[0] + '/' : '/';
+        document.getElementById('home-link').setAttribute('href', base);
+        document.getElementById('contact-link').setAttribute('href', base + '#contato');
+        document.getElementById('path-display').textContent = location.pathname;
+      })();
+    </script>
+  </body>
+</html>

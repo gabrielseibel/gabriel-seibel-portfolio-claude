@@ -51,7 +51,9 @@
   --border-soft: rgb(255 255 255 / 0.08);
   --text-primary: #f5f4f2;
   --text-secondary: rgb(245 244 242 / 0.64);
-  --text-tertiary: rgb(245 244 242 / 0.4);
+  /* 0.5 (não 0.4): 0.4 media ~3.55:1 contra --bg, abaixo do mínimo AA
+     (4.5:1) para texto normal. 0.5 fica em ~4.95:1. */
+  --text-tertiary: rgb(245 244 242 / 0.5);
   --grid-line: rgb(255 255 255 / 0.05);
   --cursor-mix: screen;
 }
@@ -64,7 +66,9 @@
   --border-soft: rgb(10 10 16 / 0.08);
   --text-primary: #0e0e13;
   --text-secondary: rgb(14 14 19 / 0.64);
-  --text-tertiary: rgb(14 14 19 / 0.42);
+  /* 0.58 (não 0.42): 0.42 media ~2.75:1 contra --bg, bem abaixo do
+     mínimo AA (4.5:1). 0.58 fica em ~4.59:1. */
+  --text-tertiary: rgb(14 14 19 / 0.58);
   --grid-line: rgb(10 10 16 / 0.05);
   --cursor-mix: multiply;
 }
@@ -78,7 +82,7 @@
     --border-soft: rgb(10 10 16 / 0.08);
     --text-primary: #0e0e13;
     --text-secondary: rgb(14 14 19 / 0.64);
-    --text-tertiary: rgb(14 14 19 / 0.42);
+    --text-tertiary: rgb(14 14 19 / 0.58);
     --grid-line: rgb(10 10 16 / 0.05);
     --cursor-mix: multiply;
   }

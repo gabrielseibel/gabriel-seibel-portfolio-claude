@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://gabrielseibel.github.io/gabriel-seibel-portfolio-claude/sitemap.xml

@@ -1,0 +1,19 @@
+{
+  "name": "Gabriel Seibel — Gestão, Coordenação & Liderança",
+  "short_name": "Gabriel Seibel",
+  "description": "Portfólio pessoal de Gabriel Antonio Carrera Seibel — gestão, coordenação e liderança.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "browser",
+  "background_color": "#0a0a10",
+  "theme_color": "#0a0a10",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

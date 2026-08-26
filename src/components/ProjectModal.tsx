@@ -35,8 +35,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           aria-modal="true"
           aria-labelledby="project-modal-title"
         >
+          {/* Solid, not blurred: a full-viewport backdrop-filter here forces the
+              browser to resample everything behind it (Hero's gradients, the
+              custom cursor) on every frame, which is what was freezing the
+              page on open. A solid scrim gives the same contrast for free. */}
           <motion.div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/80"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -48,7 +52,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="glass-strong relative max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-(--border-soft) shadow-2xl"
+            className="relative max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-(--border-soft) bg-(--surface) shadow-2xl"
           >
             <div className={`relative h-40 w-full bg-gradient-to-br sm:h-52 ${project.gradient}`}>
               <div className="absolute inset-0 bg-grid opacity-20" />

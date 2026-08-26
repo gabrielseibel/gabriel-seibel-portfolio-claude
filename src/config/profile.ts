@@ -355,7 +355,12 @@ export const skillCategories: SkillCategory[] = [
 // ----------------------------------------------------------------------------
 // Projetos / Casos de destaque
 // ----------------------------------------------------------------------------
-export type ProjectCategory = 'Gestão' | 'Comercial' | 'Tecnologia' | 'Educação';
+export type ProjectCategory = 'Gestão' | 'Comercial' | 'Tecnologia' | 'Educação' | 'Desenvolvimento';
+
+// Duas trilhas de carreira, mostradas em seções separadas na página de
+// Projetos: a trajetória de gestão/liderança e os projetos de desenvolvimento
+// de software construídos por conta própria.
+export type ProjectGroup = 'trabalho' | 'desenvolvimento';
 
 export interface Project {
   id: string;
@@ -363,6 +368,7 @@ export interface Project {
   summary: string;
   description: string;
   category: ProjectCategory;
+  group: ProjectGroup;
   tags: string[];
   period: string;
   challenges: string;
@@ -375,6 +381,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'quintal-reestruturacao',
+    group: 'trabalho',
     title: 'Reestruturação — O Quintal da Minha Casa',
     summary: 'Replanejamento estratégico e mudança para sede própria.',
     description:
@@ -390,6 +397,7 @@ export const projects: Project[] = [
   },
   {
     id: 'vk2-crescimento-comercial',
+    group: 'trabalho',
     title: 'Estratégia Comercial — VK2 Studio Web',
     summary: 'Estruturação da área comercial como sócio-gestor.',
     description:
@@ -405,6 +413,7 @@ export const projects: Project[] = [
   },
   {
     id: 'awa-implantacao-sistemas',
+    group: 'trabalho',
     title: 'Implantação de Sistemas — AWA Sistemas',
     summary: 'Consultoria de negócios aplicada à parametrização de sistemas.',
     description:
@@ -420,6 +429,7 @@ export const projects: Project[] = [
   },
   {
     id: 'manual-dos-games',
+    group: 'trabalho',
     title: 'Manual dos Games — Direção Editorial',
     summary: 'De portal iniciante a referência nacional em games.',
     description:
@@ -435,6 +445,7 @@ export const projects: Project[] = [
   },
   {
     id: 'zinpao-ti-operacoes',
+    group: 'trabalho',
     title: 'TI & Operações Multidisciplinares — Zin Pão',
     summary: 'Direção de TI com atuação estratégica transversal.',
     description:
@@ -450,6 +461,7 @@ export const projects: Project[] = [
   },
   {
     id: 'senac-docencia',
+    group: 'trabalho',
     title: 'Docência — SENAC',
     summary: 'Formação de novos profissionais em gestão e marketing.',
     description:
@@ -463,14 +475,86 @@ export const projects: Project[] = [
       'Aulas estruturadas com forte conexão prática, unindo experiência real de liderança e gestão ao conteúdo pedagógico.',
     gradient: 'from-fuchsia-500 via-purple-600 to-indigo-600',
   },
-];
-
-export const projectCategories: ('Todos' | ProjectCategory)[] = [
-  'Todos',
-  'Gestão',
-  'Comercial',
-  'Tecnologia',
-  'Educação',
+  {
+    id: 'jurisdoc-ai',
+    group: 'desenvolvimento',
+    title: 'JurisDoc AI',
+    summary: 'Plataforma SaaS de IA jurídica para advogados e pequenos escritórios.',
+    description:
+      'Envio de processos em PDF com geração automática de resumo estruturado (partes, pedidos, cronologia, fatos, riscos e prazos) e chat com IA que responde exclusivamente com base no conteúdo do próprio processo (RAG), sempre citando a página de origem.',
+    category: 'Desenvolvimento',
+    tags: ['React', 'Node.js', 'PostgreSQL + pgvector', 'RAG', 'LangChain'],
+    period: '2026',
+    challenges:
+      'Ancorar cada resposta da IA no processo real do cliente (nunca alucinar), mantendo custo e latência baixos mesmo para documentos com milhares de páginas.',
+    results:
+      'Pipeline completo de upload → extração → chunking → embeddings → indexação vetorial → resumo automático, com autenticação, auditoria e arquitetura pronta para plano pago.',
+    gradient: 'from-slate-600 via-blue-600 to-cyan-500',
+  },
+  {
+    id: 'jozenir-camargo-site',
+    group: 'desenvolvimento',
+    title: 'Site & Painel — Jozenir Camargo & Associados',
+    summary: 'Site institucional para escritório de advocacia + painel administrativo próprio.',
+    description:
+      'Site institucional responsivo e otimizado para SEO de um escritório especializado em Direito do Trabalho, com um painel administrativo completo (14 telas) que permite editar todo o conteúdo e as imagens do site sem tocar em código.',
+    category: 'Desenvolvimento',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Express', 'JWT'],
+    period: '2026',
+    challenges:
+      'Dar autonomia total de edição de conteúdo ao escritório, sem inventar nenhuma informação (OAB, endereços, depoimentos) que ainda não havia sido fornecida.',
+    results:
+      'Painel administrativo funcional com autenticação, exportação de configuração e site público que reflete as edições imediatamente.',
+    gradient: 'from-amber-600 via-orange-500 to-rose-500',
+  },
+  {
+    id: 'cat-quest',
+    group: 'desenvolvimento',
+    title: 'Cat Quest',
+    summary: 'Extensão de navegador — jogo casual de cuidar de gatos, 100% offline.',
+    description:
+      'Jogo para Chrome (Manifest V3) com 7 gatos e 6 ambientes desbloqueáveis, 3 minigames, sistema de nível/XP, missões diárias e progresso salvo localmente, sem backend, sem cadastro e sem coleta de dados.',
+    category: 'Desenvolvimento',
+    tags: ['React', 'TypeScript', 'Vite', 'Chrome Extension'],
+    period: '2026',
+    challenges:
+      'Manter toda a lógica de jogo isolada e testável (sem depender de React ou da API do Chrome), incluindo o cálculo correto de progresso mesmo enquanto o jogo está fechado.',
+    results:
+      '62 testes automatizados cobrindo o motor do jogo, pacote final em torno de 6MB após otimização das imagens geradas por IA.',
+    gradient: 'from-pink-500 via-rose-400 to-orange-300',
+  },
+  {
+    id: 'stop-extension',
+    group: 'desenvolvimento',
+    title: 'STOP!',
+    summary: 'Extensão de navegador — jogo de STOP/ADedonha contra um bot local.',
+    description:
+      'Jogo completo de STOP para um jogador, com 14 categorias nativas, categorias personalizadas, modo Turbo, Desafio do Dia com seed determinística (igual para todo mundo no mesmo dia) e um bot local com 4 níveis de dificuldade.',
+    category: 'Desenvolvimento',
+    tags: ['JavaScript', 'ES Modules', 'Chrome Extension'],
+    period: '2026',
+    challenges:
+      'Construir a validação automática de respostas (normalização de acentos, checagem contra banco de palavras) e a pontuação sem nenhuma dependência externa.',
+    results:
+      '59 testes automatizados, 100% offline (nenhum dado sai do navegador), arquitetura que separa a lógica de jogo da interface para facilitar testes.',
+    gradient: 'from-lime-500 via-emerald-500 to-teal-500',
+  },
+  {
+    id: 'vehicle-analytics',
+    group: 'desenvolvimento',
+    title: 'Análise de Tráfego — Contagem de Veículos',
+    summary: 'Sistema de visão computacional para contagem e classificação de veículos em tempo real.',
+    description:
+      'Detecção e rastreamento de veículos e pessoas por câmera com um modelo YOLOv8 próprio treinado, contagem de cruzamentos por linha definida pelo usuário (com direção), estimativa de cor e tipo de veículo, e um dashboard web em tempo real.',
+    category: 'Desenvolvimento',
+    tags: ['Python', 'YOLOv8', 'OpenCV', 'Flask + SocketIO', 'SQLite'],
+    period: '2026',
+    challenges:
+      'Treinar um modelo próprio (a partir do YOLOv8 genérico) para o caso específico de tráfego, e manter o dashboard em tempo real estável no Windows.',
+    results:
+      'Modelo customizado treinado, dashboard com KPIs (veículos/hora, pico), gráficos por hora e por tipo/cor, suporte a câmera, vídeo enviado e transmissão do YouTube ao vivo.',
+    gradient: 'from-cyan-600 via-blue-500 to-indigo-600',
+  },
 ];
 
 // ----------------------------------------------------------------------------

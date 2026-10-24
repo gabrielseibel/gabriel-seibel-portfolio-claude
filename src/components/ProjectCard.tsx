@@ -19,13 +19,25 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
       onClick={() => onOpen(project)}
       className="cursor-interactive group relative block w-full overflow-hidden rounded-2xl border border-(--border-soft) bg-(--surface)/40 text-left transition-colors duration-300 hover:border-violet-400/40"
     >
-      <div className={`relative h-48 w-full overflow-hidden bg-gradient-to-br ${project.gradient}`}>
-        <div className="absolute inset-0 bg-grid opacity-20 transition-transform duration-700 ease-out group-hover:scale-110" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-display text-4xl font-semibold text-white/25 transition-transform duration-500 group-hover:scale-105">
-            {project.title.split(' ')[0]}
-          </span>
-        </div>
+      <div className={`relative h-48 w-full overflow-hidden ${project.image ? 'bg-black' : `bg-gradient-to-br ${project.gradient}`}`}>
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={`Captura de tela de ${project.title}`}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-grid opacity-20 transition-transform duration-700 ease-out group-hover:scale-110" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-4xl font-semibold text-white/25 transition-transform duration-500 group-hover:scale-105">
+                {project.title.split(' ')[0]}
+              </span>
+            </div>
+          </>
+        )}
 
         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/0 to-black/0 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <p className="translate-y-2 text-xs text-white/85 transition-transform duration-300 group-hover:translate-y-0">

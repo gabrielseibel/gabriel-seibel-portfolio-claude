@@ -54,8 +54,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="relative max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-(--border-soft) bg-(--surface) shadow-2xl"
           >
-            <div className={`relative h-40 w-full bg-gradient-to-br sm:h-52 ${project.gradient}`}>
-              <div className="absolute inset-0 bg-grid opacity-20" />
+            <div className={`relative h-40 w-full sm:h-52 ${project.image ? 'bg-black' : `bg-gradient-to-br ${project.gradient}`}`}>
+              {project.image ? (
+                <img
+                  src={project.image}
+                  alt={`Captura de tela de ${project.title}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-grid opacity-20" />
+              )}
               <button
                 type="button"
                 onClick={onClose}

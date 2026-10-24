@@ -7,6 +7,8 @@ import Reveal from './Reveal';
 
 const workProjects = projects.filter((p) => p.group === 'trabalho');
 const devProjects = projects.filter((p) => p.group === 'desenvolvimento');
+const devProducts = devProjects.filter((p) => p.subgroup === 'produtos');
+const devGames = devProjects.filter((p) => p.subgroup === 'jogos');
 
 /** Categorias realmente presentes num grupo, na ordem em que aparecem — evita
  * mostrar um filtro pill ("Educação", "Comercial"...) que não tem nada atrás. */
@@ -14,6 +16,24 @@ function categoriesIn(list: Project[]): ('Todos' | ProjectCategory)[] {
   const seen: ProjectCategory[] = [];
   for (const p of list) if (!seen.includes(p.category)) seen.push(p.category);
   return ['Todos', ...seen];
+}
+
+interface ProjectGridProps {
+  list: Project[];
+  onOpen: (project: Project) => void;
+  idPrefix: string;
+}
+
+function ProjectGrid({ list, onOpen, idPrefix }: ProjectGridProps) {
+  return (
+    <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <AnimatePresence mode="popLayout">
+        {list.map((project) => (
+          <ProjectCard key={`${idPrefix}-${project.id}`} project={project} onOpen={onOpen} />
+        ))}
+      </AnimatePresence>
+    </motion.div>
+  );
 }
 
 interface ProjectGroupSectionProps {
@@ -71,13 +91,7 @@ function ProjectGroupSection({ eyebrow, title, list, onOpen }: ProjectGroupSecti
         </Reveal>
       )}
 
-      <motion.div layout className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} onOpen={onOpen} />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      <ProjectGrid list={filtered} onOpen={onOpen} idPrefix={eyebrow} />
 
       {filtered.length === 0 && (
         <p className="py-16 text-center text-sm text-(--text-tertiary)">
@@ -110,12 +124,32 @@ export default function Projects() {
           onOpen={setSelectedProject}
         />
 
-        <ProjectGroupSection
-          eyebrow="Por conta própria"
-          title="Projetos de desenvolvimento."
-          list={devProjects}
-          onOpen={setSelectedProject}
-        />
+        <div className="mb-20 last:mb-0">
+          <Reveal className="mb-10 max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-fuchsia-400">
+              Por conta própria
+            </span>
+            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-(--text-primary) sm:text-3xl">
+              Projetos de desenvolvimento.
+            </h3>
+          </Reveal>
+
+          <Reveal delay={0.05} className="mb-5">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">
+              Produtos &amp; Ferramentas
+            </span>
+          </Reveal>
+          <div className="mb-12">
+            <ProjectGrid list={devProducts} onOpen={setSelectedProject} idPrefix="produtos" />
+          </div>
+
+          <Reveal delay={0.05} className="mb-5">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">
+              Jogos
+            </span>
+          </Reveal>
+          <ProjectGrid list={devGames} onOpen={setSelectedProject} idPrefix="jogos" />
+        </div>
       </div>
 
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />

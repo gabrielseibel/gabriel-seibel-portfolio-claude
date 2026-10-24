@@ -9,6 +9,21 @@
  */
 
 import type { LucideIcon } from 'lucide-react';
+import imgJurisdocAi from '../assets/projects/jurisdoc-ai.webp';
+import imgJozenirSite from '../assets/projects/jozenir-camargo-site.webp';
+import imgCatQuest from '../assets/projects/cat-quest.webp';
+import imgStopExtension from '../assets/projects/stop-extension.webp';
+import imgFc27 from '../assets/projects/fc27-manager-control.webp';
+import imgStoreVision from '../assets/projects/store-vision-analytics.webp';
+import imgPlantationVision from '../assets/projects/plantation-vision-analytics.webp';
+import imgMeuPrimeiroWindows from '../assets/projects/meu-primeiro-windows.webp';
+import imgEscapeWeb from '../assets/projects/escape-do-trabalho.webp';
+import imgEscapeUnity from '../assets/projects/escape-do-trabalho-unity.webp';
+import imgEscapeHdrp from '../assets/projects/escape-do-trabalho-real.webp';
+import imgClubeDeBolso from '../assets/projects/clube-de-bolso.webp';
+import imgNaVarzeaWeb from '../assets/projects/na-varzea.webp';
+import imgNaVarzeaUnity from '../assets/projects/na-varzea-unity.webp';
+import imgMuddySundays from '../assets/projects/muddy-sundays.webp';
 import {
   Users,
   Target,
@@ -362,6 +377,10 @@ export type ProjectCategory = 'Gestão' | 'Comercial' | 'Tecnologia' | 'Educaç�
 // de software construídos por conta própria.
 export type ProjectGroup = 'trabalho' | 'desenvolvimento';
 
+// Dentro de "desenvolvimento", subdivide produtos/ferramentas de jogos —
+// só usado para agrupar o grid, não aparece como filtro.
+export type ProjectSubgroup = 'produtos' | 'jogos';
+
 export interface Project {
   id: string;
   title: string;
@@ -369,11 +388,13 @@ export interface Project {
   description: string;
   category: ProjectCategory;
   group: ProjectGroup;
+  subgroup?: ProjectSubgroup;
   tags: string[];
   period: string;
   challenges: string;
   results: string;
-  gradient: string; // classes tailwind para o "cover" (placeholder visual)
+  gradient: string; // classes tailwind para o "cover" quando não há print real
+  image?: string; // screenshot real do projeto, quando existe
   link?: string;
   githubLink?: string;
 }
@@ -478,6 +499,8 @@ export const projects: Project[] = [
   {
     id: 'jurisdoc-ai',
     group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgJurisdocAi,
     title: 'JurisDoc AI',
     summary: 'Plataforma SaaS de IA jurídica para advogados e pequenos escritórios.',
     description:
@@ -494,6 +517,8 @@ export const projects: Project[] = [
   {
     id: 'jozenir-camargo-site',
     group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgJozenirSite,
     title: 'Site & Painel — Jozenir Camargo & Associados',
     summary: 'Site institucional para escritório de advocacia + painel administrativo próprio.',
     description:
@@ -510,6 +535,8 @@ export const projects: Project[] = [
   {
     id: 'cat-quest',
     group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgCatQuest,
     title: 'Cat Quest',
     summary: 'Extensão de navegador — jogo casual de cuidar de gatos, 100% offline.',
     description:
@@ -526,6 +553,8 @@ export const projects: Project[] = [
   {
     id: 'stop-extension',
     group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgStopExtension,
     title: 'STOP!',
     summary: 'Extensão de navegador — jogo de STOP/ADedonha contra um bot local.',
     description:
@@ -542,6 +571,7 @@ export const projects: Project[] = [
   {
     id: 'vehicle-analytics',
     group: 'desenvolvimento',
+    subgroup: 'produtos',
     title: 'Análise de Tráfego — Contagem de Veículos',
     summary: 'Sistema de visão computacional para contagem e classificação de veículos em tempo real.',
     description:
@@ -554,6 +584,221 @@ export const projects: Project[] = [
     results:
       'Modelo customizado treinado, dashboard com KPIs (veículos/hora, pico), gráficos por hora e por tipo/cor, suporte a câmera, vídeo enviado e transmissão do YouTube ao vivo.',
     gradient: 'from-cyan-600 via-blue-500 to-indigo-600',
+  },
+  {
+    id: 'fc27-manager-control',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgFc27,
+    title: 'FC27 Manager Control',
+    summary: 'Painel de controle para o Modo Carreira do FC 27.',
+    description:
+      'Painel web que extrai dados ao vivo do Modo Carreira do FC 27 via um exportador Lua rodando dentro do jogo, e exibe elenco, contratos, desempenho, calendário, mercado de transferências e alertas — com modo de demonstração usando dados fictícios claramente identificados.',
+    category: 'Desenvolvimento',
+    tags: ['FastAPI', 'React', 'Lua'],
+    period: '2026',
+    challenges:
+      'Extrair dados de dentro do jogo via script Lua sem acesso oficial à API, e deixar claro na interface quando os dados exibidos são reais ou de demonstração.',
+    results:
+      'Exportador Lua funcional testado em ambiente simulado, painel com 15 telas (elenco, contratos, tática, finanças, base, competições) e modo demo totalmente isolado dos dados reais.',
+    gradient: 'from-emerald-600 via-green-500 to-lime-400',
+  },
+  {
+    id: 'store-vision-analytics',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgStoreVision,
+    title: 'Store Vision Analytics',
+    summary: 'Contagem de ocupação de loja em tempo real por câmera.',
+    description:
+      'Sistema de visão computacional para lojas físicas: detecta e rastreia pessoas por câmera, conta entradas e saídas por uma linha de referência e mostra a ocupação atual em um dashboard web atualizado ao vivo.',
+    category: 'Desenvolvimento',
+    tags: ['FastAPI', 'YOLO', 'WebSocket'],
+    period: '2026',
+    challenges:
+      'Entregar uma Fase 1 funcional (ocupação em tempo real) rápido, com arquitetura pronta para evoluir para relatórios de tempo de permanência na Fase 2.',
+    results:
+      'Fase 1 (API, persistência e dashboard web básico de ocupação) em produção. Relatórios de dwell-time e tempo médio de permanência estão planejados para a Fase 2.',
+    gradient: 'from-teal-600 via-cyan-500 to-sky-400',
+  },
+  {
+    id: 'plantation-vision-analytics',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgPlantationVision,
+    title: 'Plantation Vision Analytics',
+    summary: 'Detecção de plantas, pragas e doenças por câmera em lavoura.',
+    description:
+      'Sistema de visão computacional agrícola: conta plantas, identifica pragas e ervas daninhas por espécie, e estima doenças na planta em foco, usando modelos de detecção e classificação próprios, com dashboard web em tempo real.',
+    category: 'Desenvolvimento',
+    tags: ['FastAPI', 'YOLO', 'OpenCV'],
+    period: '2026',
+    challenges:
+      'Treinar modelos de detecção e classificação específicos para soja e milho a partir de datasets próprios preparados internamente.',
+    results:
+      'Pipeline de captura, detecção e classificação funcionando com câmera ao vivo. Upload de vídeo gravado (além da câmera ao vivo) está no roadmap.',
+    gradient: 'from-lime-600 via-green-500 to-emerald-400',
+  },
+  {
+    id: 'meu-primeiro-windows',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgMeuPrimeiroWindows,
+    title: 'Meu Primeiro Windows',
+    summary: 'Curso interativo de Windows 11 para iniciantes completos.',
+    description:
+      'Aplicativo desktop que ensina o uso básico do Windows 11 do zero, com narração por voz, passo a passo guiado e exercícios práticos — pensado para quem nunca usou um computador antes.',
+    category: 'Desenvolvimento',
+    tags: ['Tauri', 'React', 'TypeScript'],
+    period: '2026',
+    challenges:
+      'Explicar conceitos de computador básico sem nenhum jargão técnico, com narração sincronizada e ritmo adequado para iniciantes completos.',
+    results:
+      'Aplicativo instalável funcional com narração por voz, testes automatizados (Playwright) e instalador próprio para Windows.',
+    gradient: 'from-sky-500 via-blue-400 to-indigo-400',
+  },
+  {
+    id: 'escape-do-trabalho',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgEscapeWeb,
+    title: 'Escape do Trabalho',
+    summary: 'Protótipo web — stealth-comédia 3D: fuja do escritório sem ser visto.',
+    description:
+      'Protótipo jogável no navegador: o objetivo é atravessar o escritório e chegar à porta de saída sem ser flagrado pelo chefe, usando esconderijos e observação de padrões de movimento.',
+    category: 'Desenvolvimento',
+    tags: ['Three.js', 'Vite', 'TypeScript'],
+    period: '2026',
+    challenges:
+      'Construir detecção de linha de visão e esconderijos interativos em 3D no navegador com boa performance.',
+    results:
+      'Vertical slice jogável publicado, com menu, tutorial e configurações — base para os portes posteriores em Unity.',
+    gradient: 'from-amber-500 via-orange-400 to-yellow-300',
+  },
+  {
+    id: 'escape-do-trabalho-unity',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgEscapeUnity,
+    title: 'Escape do Trabalho — Unity',
+    summary: 'Porte do protótipo para Unity 6 (PC, WebGL e Android).',
+    description:
+      'Reconstrução do jogo em Unity 6, multiplataforma (PC, WebGL e Android), com o mesmo conceito de stealth-comédia no ambiente de escritório.',
+    category: 'Desenvolvimento',
+    tags: ['Unity 6', 'C#', 'WebGL'],
+    period: '2026',
+    challenges:
+      'Portar a mecânica de stealth e o level design do protótipo web para a arquitetura de cena do Unity, mantendo builds para três plataformas.',
+    results:
+      'Build funcional para PC e WebGL; suporte a Android ainda depende de módulo de build adicional.',
+    gradient: 'from-orange-500 via-amber-400 to-yellow-300',
+  },
+  {
+    id: 'escape-do-trabalho-real',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgEscapeHdrp,
+    title: 'Escape do Trabalho — HDRP Realista',
+    summary: 'Versão visualmente realista do jogo, em Unity 6 HDRP.',
+    description:
+      'Terceira iteração do mesmo conceito, agora com visual realista: escritório modelado em 3D e personagens baseados no kit Rocketbox, renderizados com o pipeline HDRP do Unity 6.',
+    category: 'Desenvolvimento',
+    tags: ['Unity 6 HDRP', 'C#', 'Blender'],
+    period: '2026',
+    challenges:
+      'Levar o mesmo jogo de um visual estilizado para um renderizado realista sem perder a leveza da mecânica original, incluindo um bot de playtest para balancear a dificuldade.',
+    results:
+      'Cena realista completa (escritório modelado + personagens Rocketbox), com ferramenta própria de construção de nível (LevelBuilder) e bot de playtest automatizado.',
+    gradient: 'from-stone-500 via-amber-500 to-orange-400',
+  },
+  {
+    id: 'clube-de-bolso',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgClubeDeBolso,
+    title: 'Clube de Bolso',
+    summary: 'Jogo desktop de gestão de um clube de futebol amador.',
+    description:
+      'Jogo de gestão onde o jogador assume um pequeno clube de futebol de bairro — monta o elenco, cuida das finanças e tenta fazer o clube crescer, um domingo de cada vez.',
+    category: 'Desenvolvimento',
+    tags: ['Tauri', 'React', 'TypeScript'],
+    period: '2026',
+    challenges:
+      'Simular uma temporada inteira de futebol amador de forma simples e divertida, com um instalador desktop de verdade.',
+    results:
+      'Jogo completo com instalador para Windows (Tauri), testes automatizados e fluxo de criação de personagem/clube funcional.',
+    gradient: 'from-blue-600 via-indigo-500 to-violet-500',
+  },
+  {
+    id: 'na-varzea',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgNaVarzeaWeb,
+    title: 'Na Várzea',
+    summary: 'Protótipo web — sucessor do Clube de Bolso: um bairro isométrico vivo.',
+    description:
+      'Evolução do Clube de Bolso: em vez de só gerenciar um time, o jogador vive num bairro isométrico que reage às suas decisões — "começa no campinho, vai até onde der".',
+    category: 'Desenvolvimento',
+    tags: ['Tauri', 'React', 'TypeScript'],
+    period: '2026',
+    challenges:
+      'Expandir a simulação de um único clube para um bairro inteiro com vários sistemas vivos, mantendo a mesma leveza de produção do Clube de Bolso.',
+    results:
+      'Protótipo web jogável com onboarding de criação de personagem e bairro isométrico navegável — base para o porte em Unity.',
+    gradient: 'from-amber-600 via-yellow-500 to-lime-400',
+  },
+  {
+    id: 'na-varzea-unity',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgNaVarzeaUnity,
+    title: 'Na Várzea — Unity',
+    summary: 'Porte em Unity 6 URP, com arte própria.',
+    description:
+      'Reconstrução de Na Várzea em Unity 6 (URP), com pipeline de arte própria — modelagem em Blender exportada para um kit de personagens e cenário customizado.',
+    category: 'Desenvolvimento',
+    tags: ['Unity 6 URP', 'C#', 'Blender'],
+    period: '2026',
+    challenges:
+      'Criar um pipeline de arte 3D original (não genérica) do zero, do Blender até o kit de personagens usado no jogo.',
+    results:
+      'Campo de futebol e casas do bairro totalmente modelados e integrados ao jogo, com pipeline de exportação Blender → Unity documentado e repetível.',
+    gradient: 'from-green-600 via-lime-500 to-yellow-400',
+  },
+  {
+    id: 'muddy-sundays',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgMuddySundays,
+    title: 'Muddy Sundays',
+    summary: 'Sunday League inglês em pixel art: monte o time, suba de divisão.',
+    description:
+      'Jogo de gestão de futebol amador ambientado no interior da Inglaterra, em pixel art: o jogador assume um time de domingo (Sunday League) sem rede nos gols e tenta subir da Division Four até a Premier.',
+    category: 'Desenvolvimento',
+    tags: ['Tauri', 'React', 'Canvas'],
+    period: '2026',
+    challenges:
+      'Simular o mundo do jogo continuamente (inclusive com o jogo fechado, via simulação de partidas de domingo) mantendo a sensação de um lugar vivo.',
+    results:
+      'Mundo em pixel art navegável, narrativa de abertura completa e instalador próprio para Windows.',
+    gradient: 'from-emerald-700 via-green-600 to-lime-500',
+  },
+  {
+    id: 'shotgun-nightmare',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    title: 'Shotgun Nightmare',
+    summary: 'FPS de terror procedural em Unity 6 URP.',
+    description:
+      'Jogo de tiro em primeira pessoa com geração procedural de ambientes de terror, construído em Unity 6 com o pipeline URP.',
+    category: 'Desenvolvimento',
+    tags: ['Unity 6 URP', 'C#'],
+    period: '2026',
+    challenges:
+      'Gerar ambientes de terror proceduralmente mantendo iluminação e ritmo de jogo consistentes a cada execução.',
+    results:
+      'Build Windows funcional, com rotinas automatizadas de autoteste e teste de "sensação" (feel test) do jogo.',
+    gradient: 'from-red-800 via-red-700 to-stone-800',
   },
 ];
 

@@ -17,11 +17,7 @@ import imgFc27 from '../assets/projects/fc27-manager-control.webp';
 import imgStoreVision from '../assets/projects/store-vision-analytics.webp';
 import imgPlantationVision from '../assets/projects/plantation-vision-analytics.webp';
 import imgMeuPrimeiroWindows from '../assets/projects/meu-primeiro-windows.webp';
-import imgEscapeWeb from '../assets/projects/escape-do-trabalho.webp';
-import imgEscapeUnity from '../assets/projects/escape-do-trabalho-unity.webp';
-import imgEscapeHdrp from '../assets/projects/escape-do-trabalho-real.webp';
 import imgClubeDeBolso from '../assets/projects/clube-de-bolso.webp';
-import imgNaVarzeaWeb from '../assets/projects/na-varzea.webp';
 import imgNaVarzeaUnity from '../assets/projects/na-varzea-unity.webp';
 import imgMuddySundays from '../assets/projects/muddy-sundays.webp';
 import {
@@ -658,60 +654,6 @@ export const projects: Project[] = [
     gradient: 'from-sky-500 via-blue-400 to-indigo-400',
   },
   {
-    id: 'escape-do-trabalho',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgEscapeWeb,
-    title: 'Escape do Trabalho',
-    summary: 'Protótipo web — stealth-comédia 3D: fuja do escritório sem ser visto.',
-    description:
-      'Protótipo jogável no navegador: o objetivo é atravessar o escritório e chegar à porta de saída sem ser flagrado pelo chefe, usando esconderijos e observação de padrões de movimento.',
-    category: 'Desenvolvimento',
-    tags: ['Three.js', 'Vite', 'TypeScript'],
-    period: '2026',
-    challenges:
-      'Construir detecção de linha de visão e esconderijos interativos em 3D no navegador com boa performance.',
-    results:
-      'Vertical slice jogável publicado, com menu, tutorial e configurações — base para os portes posteriores em Unity.',
-    gradient: 'from-amber-500 via-orange-400 to-yellow-300',
-  },
-  {
-    id: 'escape-do-trabalho-unity',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgEscapeUnity,
-    title: 'Escape do Trabalho — Unity',
-    summary: 'Porte do protótipo para Unity 6 (PC, WebGL e Android).',
-    description:
-      'Reconstrução do jogo em Unity 6, multiplataforma (PC, WebGL e Android), com o mesmo conceito de stealth-comédia no ambiente de escritório.',
-    category: 'Desenvolvimento',
-    tags: ['Unity 6', 'C#', 'WebGL'],
-    period: '2026',
-    challenges:
-      'Portar a mecânica de stealth e o level design do protótipo web para a arquitetura de cena do Unity, mantendo builds para três plataformas.',
-    results:
-      'Build funcional para PC e WebGL; suporte a Android ainda depende de módulo de build adicional.',
-    gradient: 'from-orange-500 via-amber-400 to-yellow-300',
-  },
-  {
-    id: 'escape-do-trabalho-real',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgEscapeHdrp,
-    title: 'Escape do Trabalho — HDRP Realista',
-    summary: 'Versão visualmente realista do jogo, em Unity 6 HDRP.',
-    description:
-      'Terceira iteração do mesmo conceito, agora com visual realista: escritório modelado em 3D e personagens baseados no kit Rocketbox, renderizados com o pipeline HDRP do Unity 6.',
-    category: 'Desenvolvimento',
-    tags: ['Unity 6 HDRP', 'C#', 'Blender'],
-    period: '2026',
-    challenges:
-      'Levar o mesmo jogo de um visual estilizado para um renderizado realista sem perder a leveza da mecânica original, incluindo um bot de playtest para balancear a dificuldade.',
-    results:
-      'Cena realista completa (escritório modelado + personagens Rocketbox), com ferramenta própria de construção de nível (LevelBuilder) e bot de playtest automatizado.',
-    gradient: 'from-stone-500 via-amber-500 to-orange-400',
-  },
-  {
     id: 'clube-de-bolso',
     group: 'desenvolvimento',
     subgroup: 'jogos',
@@ -728,24 +670,6 @@ export const projects: Project[] = [
     results:
       'Jogo completo com instalador para Windows (Tauri), testes automatizados e fluxo de criação de personagem/clube funcional.',
     gradient: 'from-blue-600 via-indigo-500 to-violet-500',
-  },
-  {
-    id: 'na-varzea',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgNaVarzeaWeb,
-    title: 'Na Várzea',
-    summary: 'Protótipo web — sucessor do Clube de Bolso: um bairro isométrico vivo.',
-    description:
-      'Evolução do Clube de Bolso: em vez de só gerenciar um time, o jogador vive num bairro isométrico que reage às suas decisões — "começa no campinho, vai até onde der".',
-    category: 'Desenvolvimento',
-    tags: ['Tauri', 'React', 'TypeScript'],
-    period: '2026',
-    challenges:
-      'Expandir a simulação de um único clube para um bairro inteiro com vários sistemas vivos, mantendo a mesma leveza de produção do Clube de Bolso.',
-    results:
-      'Protótipo web jogável com onboarding de criação de personagem e bairro isométrico navegável — base para o porte em Unity.',
-    gradient: 'from-amber-600 via-yellow-500 to-lime-400',
   },
   {
     id: 'na-varzea-unity',

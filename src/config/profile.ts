@@ -13,11 +13,9 @@ import imgJurisdocAi from '../assets/projects/jurisdoc-ai.webp';
 import imgJozenirSite from '../assets/projects/jozenir-camargo-site.webp';
 import imgCatQuest from '../assets/projects/cat-quest.webp';
 import imgStopExtension from '../assets/projects/stop-extension.webp';
-import imgFc27 from '../assets/projects/fc27-manager-control.webp';
 import imgStoreVision from '../assets/projects/store-vision-analytics.webp';
 import imgPlantationVision from '../assets/projects/plantation-vision-analytics.webp';
 import imgMeuPrimeiroWindows from '../assets/projects/meu-primeiro-windows.webp';
-import imgClubeDeBolso from '../assets/projects/clube-de-bolso.webp';
 import imgNaVarzeaUnity from '../assets/projects/na-varzea-unity.webp';
 import imgMuddySundays from '../assets/projects/muddy-sundays.webp';
 import imgShotgunNightmare from '../assets/projects/shotgun-nightmare.webp';
@@ -26,7 +24,8 @@ import imgRadarIa from '../assets/projects/radar-ia.webp';
 import imgOfficePlayground from '../assets/projects/office-playground.webp';
 import imgPortalAr from '../assets/projects/portal-ar.webp';
 import imgGestos from '../assets/projects/gestos.webp';
-import imgSeibelTv from '../assets/projects/seibeltv.webp';
+import imgPisoteio from '../assets/projects/pisoteio.webp';
+import imgRocaAndRoll from '../assets/projects/roca-and-roll.webp';
 import imgRodaDeBobo from '../assets/projects/roda-de-bobo.webp';
 import {
   Users,
@@ -383,7 +382,36 @@ export type ProjectGroup = 'trabalho' | 'desenvolvimento';
 
 // Dentro de "desenvolvimento", subdivide produtos/ferramentas de jogos —
 // só usado para agrupar o grid, não aparece como filtro.
-export type ProjectSubgroup = 'produtos' | 'jogos';
+export type ProjectSubgroup = 'simulacao' | 'educacao' | 'visao' | 'negocios' | 'jogos';
+
+/** Temas dos projetos de desenvolvimento, na ordem em que aparecem no site. */
+export const devThemes: { id: ProjectSubgroup; title: string; intro: string }[] = [
+  {
+    id: 'simulacao',
+    title: 'Simulação em tempo real',
+    intro: 'Sistemas com centenas de agentes decidindo ao mesmo tempo, e você gerenciando o resultado.',
+  },
+  {
+    id: 'educacao',
+    title: 'Aprender brincando',
+    intro: 'Tecnologia ensinada do jeito que prende: laboratórios, desafios e XP no lugar da apostila.',
+  },
+  {
+    id: 'visao',
+    title: 'Visão computacional',
+    intro: 'Câmeras e modelos que contam, classificam e reagem ao que veem.',
+  },
+  {
+    id: 'negocios',
+    title: 'IA e produtos para negócios',
+    intro: 'Ferramentas sob medida para empresas e escritórios trabalharem melhor.',
+  },
+  {
+    id: 'jogos',
+    title: 'Jogos e experiências',
+    intro: 'Multiplayer com amigos, realidade aumentada, terror e outras ideias que viraram jogo.',
+  },
+];
 
 export interface Project {
   id: string;
@@ -501,180 +529,196 @@ export const projects: Project[] = [
       'Aulas estruturadas com forte conexão prática, unindo experiência real de liderança e gestão ao conteúdo pedagógico.',
     gradient: 'from-fuchsia-500 via-purple-600 to-indigo-600',
   },
+  // --- Simulação em tempo real ------------------------------------------------
   {
-    id: 'jurisdoc-ai',
+    id: 'pisoteio',
     group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgJurisdocAi,
-    title: 'JurisDoc AI',
-    summary: 'Plataforma SaaS de IA jurídica para advogados e pequenos escritórios.',
+    subgroup: 'simulacao',
+    image: imgPisoteio,
+    title: 'Pisoteio — Simulador de Multidões',
+    summary:
+      'Até 1.700 pessoas simuladas em tempo real: você planeja o evento e a multidão decide se ele dá certo.',
     description:
-      'Envio de processos em PDF com geração automática de resumo estruturado (partes, pedidos, cronologia, fatos, riscos e prazos) e chat com IA que responde exclusivamente com base no conteúdo do próprio processo (RAG), sempre citando a página de origem.',
+      'Jogo de gestão de multidões no navegador. Antes do evento você coloca grades, abre portões e posiciona seguranças; depois o público chega, se espreme na frente do palco e tenta sair ao mesmo tempo. Cada pessoa é simulada 30 vezes por segundo: escolhe rotas que desviam de aglomeração, empurra, cai quando a densidade passa de 5 pessoas por m² e espalha pânico para quem está perto. Os seguranças acalmam quem está em volta.',
     category: 'Desenvolvimento',
-    tags: ['React', 'Node.js', 'PostgreSQL + pgvector', 'RAG', 'LangChain'],
+    tags: ['JavaScript', 'Canvas', 'Simulação de agentes'],
     period: '2026',
     challenges:
-      'Ancorar cada resposta da IA no processo real do cliente (nunca alucinar), mantendo custo e latência baixos mesmo para documentos com milhares de páginas.',
+      'Simular até 1.500 pessoas a 60 fps num celular comum (arrays tipados e rotas por Dijkstra recalculadas a cada segundo) e tratar um tema sério como engenharia de segurança, sem violência gráfica.',
     results:
-      'Pipeline completo de upload → extração → chunking → embeddings → indexação vetorial → resumo automático, com autenticação, auditoria e arquitetura pronta para plano pago.',
-    gradient: 'from-slate-600 via-blue-600 to-cyan-500',
+      '6 fases (show, festival, réveillon, estádio, carnaval e metrô) com mapa de calor e gráfico de pressão. Cada fase tem um plano de referência validado por testes automáticos, e cada dica ensina um princípio real de gestão de multidões.',
+    gradient: 'from-red-700 via-orange-500 to-yellow-400',
+    link: 'https://gabrielseibel.github.io/pisoteio/',
+    githubLink: 'https://github.com/gabrielseibel/pisoteio',
   },
   {
-    id: 'jozenir-camargo-site',
+    id: 'roca-and-roll',
     group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgJozenirSite,
-    title: 'Site & Painel — Jozenir Camargo & Associados',
-    summary: 'Site institucional para escritório de advocacia + painel administrativo próprio.',
+    subgroup: 'simulacao',
+    image: imgRocaAndRoll,
+    title: 'Roça & Roll — Gestão de Fazenda',
+    summary:
+      'Gestão de fazenda para jovens: equipe com turnos e salário, máquinas autônomas, mercado e agroindústria.',
     description:
-      'Site institucional responsivo e otimizado para SEO de um escritório especializado em Direito do Trabalho, com um painel administrativo completo (14 telas) que permite editar todo o conteúdo e as imagens do site sem tocar em código.',
+      'Simulador de fazenda em pixel art que roda no navegador do PC e do celular. Dá para arar, plantar e colher com trator e colheitadeira, mas o centro é a gestão: contratar ajudantes com turnos de 8 horas e salário diário, dizer de quais campos cada um cuida, manter a frota de máquinas autônomas, vender no mercado com preços que mudam todo dia e montar uma agroindústria com moinho, prensa e usina de biodiesel.',
     category: 'Desenvolvimento',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Express', 'JWT'],
+    tags: ['JavaScript', 'Canvas', 'Pixel art'],
     period: '2026',
     challenges:
-      'Dar autonomia total de edição de conteúdo ao escritório, sem inventar nenhuma informação (OAB, endereços, depoimentos) que ainda não havia sido fornecida.',
+      'Fazer a equipe inteira seguir o plano sozinha, campo a campo (arar tudo, plantar, tratar e só colher quando amadurece), enquanto o jogador anda livre pelo mapa ou assume a máquina de qualquer ajudante.',
     results:
-      'Painel administrativo funcional com autenticação, exportação de configuração e site público que reflete as edições imediatamente.',
-    gradient: 'from-amber-600 via-orange-500 to-rose-500',
+      'Quatro estações, 12 campos, mina com 50 níveis, vila com 8 moradores e tutorial guiado. A trilha lo-fi de 10 faixas foi composta em código, e o save se protege contra dados corrompidos.',
+    gradient: 'from-lime-600 via-amber-500 to-orange-500',
+    link: 'https://gabrielseibel.github.io/fazenda-sossego/',
+    githubLink: 'https://github.com/gabrielseibel/fazenda-sossego',
   },
   {
-    id: 'cat-quest',
+    id: 'muddy-sundays',
     group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgCatQuest,
-    title: 'Cat Quest',
-    summary: 'Extensão de navegador — jogo casual de cuidar de gatos, 100% offline.',
+    subgroup: 'simulacao',
+    image: imgMuddySundays,
+    title: 'Muddy Sundays',
+    summary: 'Uma liga de várzea inglesa em pixel art que continua viva até com o jogo fechado.',
     description:
-      'Jogo para Chrome (Manifest V3) com 7 gatos e 6 ambientes desbloqueáveis, 3 minigames, sistema de nível/XP, missões diárias e progresso salvo localmente, sem backend, sem cadastro e sem coleta de dados.',
+      'Jogo de gestão de futebol amador ambientado no interior da Inglaterra: o jogador assume um time de domingo (Sunday League) sem rede nos gols e tenta subir da Division Four até a Premier, num mundo que segue simulando as partidas de domingo enquanto ele está fora.',
     category: 'Desenvolvimento',
-    tags: ['React', 'TypeScript', 'Vite', 'Chrome Extension'],
+    tags: ['Tauri', 'React', 'Canvas'],
     period: '2026',
     challenges:
-      'Manter toda a lógica de jogo isolada e testável (sem depender de React ou da API do Chrome), incluindo o cálculo correto de progresso mesmo enquanto o jogo está fechado.',
+      'Simular o mundo do jogo continuamente, inclusive com o jogo fechado, sem perder a sensação de um lugar vivo.',
     results:
-      '62 testes automatizados cobrindo o motor do jogo, pacote final em torno de 6MB após otimização das imagens geradas por IA.',
-    gradient: 'from-pink-500 via-rose-400 to-orange-300',
+      'Mundo em pixel art navegável, narrativa de abertura completa e instalador próprio para Windows.',
+    gradient: 'from-emerald-700 via-green-600 to-lime-500',
   },
+
+  // --- Aprender brincando -----------------------------------------------------
   {
-    id: 'stop-extension',
+    id: 'office-playground',
     group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgStopExtension,
-    title: 'STOP!',
-    summary: 'Extensão de navegador — jogo de STOP/ADedonha contra um bot local.',
+    subgroup: 'educacao',
+    image: imgOfficePlayground,
+    title: 'Office Playground',
+    summary: 'Aprender Word, Excel e PowerPoint brincando, sem apostila, sem login e com XP.',
     description:
-      'Jogo completo de STOP para um jogador, com 14 categorias nativas, categorias personalizadas, modo Turbo, Desafio do Dia com seed determinística (igual para todo mundo no mesmo dia) e um bot local com 4 níveis de dificuldade.',
+      'Quem abre o site não lê um manual: mexe. Os laboratórios imitam o Word, o Excel e o PowerPoint e cada tarefa vale XP, com arcade de minigames, conquistas, trilha de aprendizagem e um desafio mestre no fim. O site também reúne as aulas do curso de Informática Essencial, inclusive o módulo de redes.',
     category: 'Desenvolvimento',
-    tags: ['JavaScript', 'ES Modules', 'Chrome Extension'],
+    tags: ['Next.js', 'React', 'Tailwind', 'Framer Motion'],
     period: '2026',
     challenges:
-      'Construir a validação automática de respostas (normalização de acentos, checagem contra banco de palavras) e a pontuação sem nenhuma dependência externa.',
+      'Recriar a sensação dos programas do Office dentro do navegador, leve o bastante para rodar em computadores simples de sala de aula.',
     results:
-      '59 testes automatizados, 100% offline (nenhum dado sai do navegador), arquitetura que separa a lógica de jogo da interface para facilitar testes.',
-    gradient: 'from-lime-500 via-emerald-500 to-teal-500',
-  },
-  {
-    id: 'vehicle-analytics',
-    group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgVehicleAnalytics,
-    illustrativeImage: true,
-    title: 'Análise de Tráfego — Contagem de Veículos',
-    summary: 'Sistema de visão computacional para contagem e classificação de veículos em tempo real.',
-    description:
-      'Detecção e rastreamento de veículos e pessoas por câmera com um modelo YOLOv8 próprio treinado, contagem de cruzamentos por linha definida pelo usuário (com direção), estimativa de cor e tipo de veículo, e um dashboard web em tempo real.',
-    category: 'Desenvolvimento',
-    tags: ['Python', 'YOLOv8', 'OpenCV', 'Flask + SocketIO', 'SQLite'],
-    period: '2026',
-    challenges:
-      'Treinar um modelo próprio (a partir do YOLOv8 genérico) para o caso específico de tráfego, e manter o dashboard em tempo real estável no Windows.',
-    results:
-      'Modelo customizado treinado, dashboard com KPIs (veículos/hora, pico), gráficos por hora e por tipo/cor, suporte a câmera, vídeo enviado e transmissão do YouTube ao vivo.',
-    gradient: 'from-cyan-600 via-blue-500 to-indigo-600',
-  },
-  {
-    id: 'fc27-manager-control',
-    group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgFc27,
-    title: 'FC27 Manager Control',
-    summary: 'Painel de controle para o Modo Carreira do FC 27.',
-    description:
-      'Painel web que extrai dados ao vivo do Modo Carreira do FC 27 via um exportador Lua rodando dentro do jogo, e exibe elenco, contratos, desempenho, calendário, mercado de transferências e alertas — com modo de demonstração usando dados fictícios claramente identificados.',
-    category: 'Desenvolvimento',
-    tags: ['FastAPI', 'React', 'Lua'],
-    period: '2026',
-    challenges:
-      'Extrair dados de dentro do jogo via script Lua sem acesso oficial à API, e deixar claro na interface quando os dados exibidos são reais ou de demonstração.',
-    results:
-      'Exportador Lua funcional testado em ambiente simulado, painel com 15 telas (elenco, contratos, tática, finanças, base, competições) e modo demo totalmente isolado dos dados reais.',
-    gradient: 'from-emerald-600 via-green-500 to-lime-400',
-  },
-  {
-    id: 'store-vision-analytics',
-    group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgStoreVision,
-    illustrativeImage: true,
-    title: 'Store Vision Analytics',
-    summary: 'Contagem de ocupação de loja em tempo real por câmera.',
-    description:
-      'Sistema de visão computacional para lojas físicas: detecta e rastreia pessoas por câmera, conta entradas e saídas por uma linha de referência e mostra a ocupação atual em um dashboard web atualizado ao vivo.',
-    category: 'Desenvolvimento',
-    tags: ['FastAPI', 'YOLO', 'WebSocket'],
-    period: '2026',
-    challenges:
-      'Entregar uma Fase 1 funcional (ocupação em tempo real) rápido, com arquitetura pronta para evoluir para relatórios de tempo de permanência na Fase 2.',
-    results:
-      'Fase 1 (API, persistência e dashboard web básico de ocupação) em produção. Relatórios de dwell-time e tempo médio de permanência estão planejados para a Fase 2.',
-    gradient: 'from-teal-600 via-cyan-500 to-sky-400',
-  },
-  {
-    id: 'plantation-vision-analytics',
-    group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgPlantationVision,
-    illustrativeImage: true,
-    title: 'Plantation Vision Analytics',
-    summary: 'Detecção de plantas, pragas e doenças por câmera em lavoura.',
-    description:
-      'Sistema de visão computacional agrícola: conta plantas, identifica pragas e ervas daninhas por espécie, e estima doenças na planta em foco, usando modelos de detecção e classificação próprios, com dashboard web em tempo real.',
-    category: 'Desenvolvimento',
-    tags: ['FastAPI', 'YOLO', 'OpenCV'],
-    period: '2026',
-    challenges:
-      'Treinar modelos de detecção e classificação específicos para soja e milho a partir de datasets próprios preparados internamente.',
-    results:
-      'Pipeline de captura, detecção e classificação funcionando com câmera ao vivo. Upload de vídeo gravado (além da câmera ao vivo) está no roadmap.',
-    gradient: 'from-lime-600 via-green-500 to-emerald-400',
+      'No ar no GitHub Pages, com laboratórios de Word, Excel e PowerPoint, sala de aula, desafio mestre e guias por unidade curricular.',
+    gradient: 'from-blue-600 via-emerald-500 to-orange-400',
+    link: 'https://gabrielseibel.github.io/office-playground/',
+    githubLink: 'https://github.com/gabrielseibel/office-playground',
   },
   {
     id: 'meu-primeiro-windows',
     group: 'desenvolvimento',
-    subgroup: 'produtos',
+    subgroup: 'educacao',
     image: imgMeuPrimeiroWindows,
     title: 'Meu Primeiro Windows',
-    summary: 'Curso interativo de Windows 11 para iniciantes completos.',
+    summary: 'Ensina o Windows do zero, com voz e exercícios, para quem nunca usou um computador.',
     description:
-      'Aplicativo desktop que ensina o uso básico do Windows 11 do zero, com narração por voz, passo a passo guiado e exercícios práticos — pensado para quem nunca usou um computador antes.',
+      'Aplicativo desktop que ensina o uso básico do Windows 11 do zero, com narração por voz, passo a passo guiado e exercícios práticos, pensado para quem nunca usou um computador antes.',
     category: 'Desenvolvimento',
     tags: ['Tauri', 'React', 'TypeScript'],
     period: '2026',
     challenges:
       'Explicar conceitos de computador básico sem nenhum jargão técnico, com narração sincronizada e ritmo adequado para iniciantes completos.',
     results:
-      'Aplicativo instalável funcional com narração por voz, testes automatizados (Playwright) e instalador próprio para Windows.',
+      'Aplicativo instalável com narração por voz, testes automatizados (Playwright) e instalador próprio para Windows.',
     gradient: 'from-sky-500 via-blue-400 to-indigo-400',
   },
+
+  // --- Visão computacional ----------------------------------------------------
+  {
+    id: 'store-vision-analytics',
+    group: 'desenvolvimento',
+    subgroup: 'visao',
+    image: imgStoreVision,
+    illustrativeImage: true,
+    title: 'Store Vision Analytics',
+    summary: 'Uma câmera que conta quem entra e quem sai e mostra a ocupação da loja ao vivo.',
+    description:
+      'Sistema de visão computacional para lojas físicas: detecta e rastreia pessoas por câmera, conta entradas e saídas por uma linha de referência e mostra a ocupação atual num painel web atualizado ao vivo.',
+    category: 'Desenvolvimento',
+    tags: ['FastAPI', 'YOLO', 'WebSocket'],
+    period: '2026',
+    challenges:
+      'Entregar rápido uma Fase 1 funcional (ocupação em tempo real), com arquitetura pronta para evoluir para relatórios de tempo de permanência na Fase 2.',
+    results:
+      'Fase 1 (API, persistência e painel de ocupação) em produção. Os relatórios de tempo médio de permanência estão planejados para a Fase 2.',
+    gradient: 'from-teal-600 via-cyan-500 to-sky-400',
+  },
+  {
+    id: 'plantation-vision-analytics',
+    group: 'desenvolvimento',
+    subgroup: 'visao',
+    image: imgPlantationVision,
+    illustrativeImage: true,
+    title: 'Plantation Vision Analytics',
+    summary: 'Câmera na lavoura que conta plantas e identifica pragas, ervas daninhas e doenças.',
+    description:
+      'Sistema de visão computacional agrícola: conta plantas, identifica pragas e ervas daninhas por espécie e estima doenças na planta em foco, com modelos próprios de detecção e classificação e painel web em tempo real.',
+    category: 'Desenvolvimento',
+    tags: ['FastAPI', 'YOLO', 'OpenCV'],
+    period: '2026',
+    challenges:
+      'Treinar modelos de detecção e classificação específicos para soja e milho a partir de datasets próprios.',
+    results:
+      'Captura, detecção e classificação funcionando com câmera ao vivo. A análise de vídeo gravado está no roadmap.',
+    gradient: 'from-lime-600 via-green-500 to-emerald-400',
+  },
+  {
+    id: 'vehicle-analytics',
+    group: 'desenvolvimento',
+    subgroup: 'visao',
+    image: imgVehicleAnalytics,
+    illustrativeImage: true,
+    title: 'Análise de Tráfego — Contagem de Veículos',
+    summary: 'Conta e classifica veículos por tipo, cor e direção com um modelo YOLOv8 treinado para isso.',
+    description:
+      'Detecção e rastreamento de veículos e pessoas por câmera com um modelo YOLOv8 treinado para o caso, contagem de cruzamentos por uma linha definida pelo usuário (com direção), estimativa de cor e tipo de veículo e um painel web em tempo real.',
+    category: 'Desenvolvimento',
+    tags: ['Python', 'YOLOv8', 'OpenCV', 'Flask + SocketIO', 'SQLite'],
+    period: '2026',
+    challenges:
+      'Treinar um modelo próprio, a partir do YOLOv8 genérico, para o caso específico de tráfego, e manter o painel em tempo real estável no Windows.',
+    results:
+      'Modelo customizado treinado e painel com veículos por hora, pico e gráficos por tipo e cor, aceitando câmera, vídeo enviado e transmissão ao vivo do YouTube.',
+    gradient: 'from-cyan-600 via-blue-500 to-indigo-600',
+  },
+  {
+    id: 'gestos',
+    group: 'desenvolvimento',
+    subgroup: 'visao',
+    image: imgGestos,
+    illustrativeImage: true,
+    title: 'Gestos — Windows por Gestos de Mão',
+    summary: 'Controla o Windows com a mão no ar: a pinça clica, o polegar ajusta o volume.',
+    description:
+      'App em Python que lê os 21 pontos da mão pela webcam (MediaPipe) e transforma gestos em comandos do Windows: arrastar a mão aberta avança ou volta (slides, abas, músicas), o polegar para cima ou para baixo muda o volume, o indicador move o mouse e a pinça clica e arrasta.',
+    category: 'Desenvolvimento',
+    tags: ['Python', 'MediaPipe', 'OpenCV'],
+    period: '2026',
+    challenges:
+      'Deixar o cursor firme quando a mão está parada e sem atraso quando ela se move (filtro One Euro), evitando cliques acidentais.',
+    results:
+      '8 gestos com 5 modos de navegação, modo de simulação que só mostra o que faria e testes automatizados com mãos sintéticas.',
+    gradient: 'from-zinc-700 via-neutral-600 to-zinc-500',
+  },
+
+  // --- IA e produtos para negócios ---------------------------------------------
   {
     id: 'radar-ia',
     group: 'desenvolvimento',
-    subgroup: 'produtos',
+    subgroup: 'negocios',
     image: imgRadarIa,
     title: 'Radar IA',
-    summary: 'Minha consultoria de IA aplicada para PMEs, com diagnóstico gratuito online.',
+    summary: 'Minha consultoria de IA para PMEs: um diagnóstico de 3 minutos mostra onde a IA entra primeiro.',
     description:
-      'Site da minha consultoria em IA aplicada para pequenas e médias empresas. O centro é um diagnóstico de 12 perguntas que mede o potencial de uso de IA em seis frentes da operação (rotinas, atendimento, documentos, operação, dados e pessoas), mostra o nível da empresa comparado ao porte e gera um resultado que pode ser compartilhado por link.',
+      'Site da minha consultoria em IA aplicada para pequenas e médias empresas. O centro é um diagnóstico de 12 perguntas que mede o potencial de uso de IA em seis frentes da operação (rotinas, atendimento, documentos, operação, dados e pessoas), compara a empresa com outras do mesmo porte e gera um resultado que pode ser compartilhado por link.',
     category: 'Desenvolvimento',
     tags: ['React 19', 'TypeScript', 'Tailwind 4', 'Vitest'],
     period: '2026',
@@ -687,34 +731,70 @@ export const projects: Project[] = [
     githubLink: 'https://github.com/gabrielseibel/radar-ia',
   },
   {
-    id: 'office-playground',
+    id: 'jurisdoc-ai',
     group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgOfficePlayground,
-    title: 'Office Playground',
-    summary: 'Plataforma para aprender Word, Excel e PowerPoint brincando.',
+    subgroup: 'negocios',
+    image: imgJurisdocAi,
+    title: 'JurisDoc AI',
+    summary: 'IA que lê o processo jurídico inteiro e responde sempre citando a página de origem.',
     description:
-      'Site educativo com laboratórios interativos que imitam o Word, o Excel e o PowerPoint, arcade de minigames, trilha de aprendizagem com XP e conquistas, e as aulas do curso de Informática Essencial (inclusive o módulo de redes). Funciona sem login nem cadastro.',
+      'Plataforma para advogados e pequenos escritórios: envio de processos em PDF com resumo estruturado automático (partes, pedidos, cronologia, fatos, riscos e prazos) e chat com IA que responde só com base no conteúdo do próprio processo (RAG), sempre citando a página.',
     category: 'Desenvolvimento',
-    tags: ['Next.js', 'React', 'Tailwind', 'Framer Motion'],
+    tags: ['React', 'Node.js', 'PostgreSQL + pgvector', 'RAG', 'LangChain'],
     period: '2026',
     challenges:
-      'Recriar a sensação dos programas do Office dentro do navegador, leve o bastante para rodar em computadores simples de sala de aula.',
+      'Ancorar cada resposta da IA no processo real do cliente, sem inventar nada, mantendo custo e tempo de resposta baixos mesmo em documentos com milhares de páginas.',
     results:
-      'Publicado no GitHub Pages, com laboratórios de Word, Excel e PowerPoint, sala de aula, desafio mestre e guias por unidade curricular.',
-    gradient: 'from-blue-600 via-emerald-500 to-orange-400',
-    link: 'https://gabrielseibel.github.io/office-playground/',
-    githubLink: 'https://github.com/gabrielseibel/office-playground',
+      'Pipeline completo de upload, extração, divisão em trechos, embeddings, indexação vetorial e resumo automático, com autenticação, auditoria e arquitetura pronta para plano pago.',
+    gradient: 'from-slate-600 via-blue-600 to-cyan-500',
+  },
+  {
+    id: 'jozenir-camargo-site',
+    group: 'desenvolvimento',
+    subgroup: 'negocios',
+    image: imgJozenirSite,
+    title: 'Site & Painel — Jozenir Camargo & Associados',
+    summary: 'Site de escritório de advocacia com painel próprio: o cliente edita tudo sem tocar em código.',
+    description:
+      'Site institucional responsivo e otimizado para SEO de um escritório especializado em Direito do Trabalho, com um painel administrativo completo (14 telas) que permite editar todo o conteúdo e as imagens do site sem tocar em código.',
+    category: 'Desenvolvimento',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Express', 'JWT'],
+    period: '2026',
+    challenges:
+      'Dar autonomia total de edição ao escritório, sem inventar nenhuma informação (OAB, endereços, depoimentos) que ainda não tivesse sido fornecida.',
+    results:
+      'Painel administrativo com autenticação, exportação de configuração e site público que reflete as edições na hora.',
+    gradient: 'from-amber-600 via-orange-500 to-rose-500',
+  },
+
+  // --- Jogos e experiências ---------------------------------------------------
+  {
+    id: 'roda-de-bobo',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgRodaDeBobo,
+    title: 'Roda de Bobo — Jogos de Auditório Online',
+    summary: '36 minigames de auditório para jogar com os amigos, numa mesa com avatares que falam.',
+    description:
+      'Site multiplayer inspirado nos quadros do programa Roda de Bobo (CazéTV): alguém cria a sala, manda o link e todos sentam numa mesa virtual com avatares que mexem a boca quando a pessoa fala. São 36 jogos (quiz, palpites, blefe, mímica, desenho ao vivo, futebol) com milhares de perguntas e desafios.',
+    category: 'Desenvolvimento',
+    tags: ['Node.js', 'WebSocket', 'JavaScript'],
+    period: '2026',
+    challenges:
+      'Servidor que guarda os segredos de cada jogo e manda para cada jogador só o que ele pode ver, sem repetir conteúdo dentro da mesma sala.',
+    results:
+      'Publicado na nuvem com deploy a cada atualização, Modo Programa com placar da noite, robôs para testar sem amigos e mais de 80 testes automatizados de regras e conteúdo.',
+    gradient: 'from-indigo-700 via-purple-600 to-amber-400',
   },
   {
     id: 'portal-ar',
     group: 'desenvolvimento',
-    subgroup: 'produtos',
+    subgroup: 'jogos',
     image: imgPortalAr,
     title: 'PORTAL — Realidade Aumentada',
-    summary: 'Mundos 3D em realidade aumentada que abrem no navegador do celular.',
+    summary: 'O celular vira uma janela para mundos 3D em miniatura, direto no navegador.',
     description:
-      'Experiência WebAR feita com Three.js: o celular abre um portal para mundos em miniatura que dá para explorar, com descobertas escondidas. O mundo mais recente, Fazenda da Duda, é um vale inteiro (fazenda, vila com praça, rio, praia e montanhas) com texturas pintadas geradas por código, montado em volta do modelo 3D de uma casa de fazenda.',
+      'Experiência de realidade aumentada feita com Three.js: o celular abre um portal para mundos em miniatura que dá para explorar, com descobertas escondidas. O mundo mais recente, Fazenda da Duda, é um vale inteiro (fazenda, vila com praça, rio, praia e montanhas) com texturas pintadas geradas por código, em volta do modelo 3D de uma casa de fazenda.',
     category: 'Desenvolvimento',
     tags: ['Three.js', 'WebXR', 'TypeScript', 'Blender'],
     period: '2026',
@@ -727,103 +807,12 @@ export const projects: Project[] = [
     githubLink: 'https://github.com/gabrielseibel/portal-ar',
   },
   {
-    id: 'gestos',
-    group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgGestos,
-    illustrativeImage: true,
-    title: 'Gestos — Windows por Gestos de Mão',
-    summary: 'Controle do computador com gestos de mão pela webcam.',
-    description:
-      'App em Python que lê os 21 pontos da mão pela webcam (MediaPipe) e transforma gestos em comandos do Windows: arrastar a mão aberta avança ou volta (slides, abas, músicas), o polegar para cima ou para baixo muda o volume, o indicador move o mouse e a pinça clica e arrasta.',
-    category: 'Desenvolvimento',
-    tags: ['Python', 'MediaPipe', 'OpenCV'],
-    period: '2026',
-    challenges:
-      'Deixar o cursor firme quando a mão está parada e sem atraso quando ela se move (filtro One Euro), evitando cliques acidentais.',
-    results:
-      '8 gestos com 5 modos de navegação, modo de simulação que só mostra o que faria e testes automatizados com mãos sintéticas.',
-    gradient: 'from-zinc-700 via-neutral-600 to-zinc-500',
-  },
-  {
-    id: 'seibeltv',
-    group: 'desenvolvimento',
-    subgroup: 'produtos',
-    image: imgSeibelTv,
-    title: 'SeibelTV — Marca e Automação de Lives',
-    summary: 'Identidade visual e automação completa para um canal de lives.',
-    description:
-      'Kit de marca do meu canal de lives, todo gerado por código: logo, banners para Twitch, YouTube, Kick e TikTok, telas animadas e alertas. Inclui scripts que configuram o OBS sozinhos (cenas horizontais e verticais, perfil de transmissão, multistream) e um autoclipe que salva clipes verticais a partir do chat, de raids ou de um grito no microfone.',
-    category: 'Desenvolvimento',
-    tags: ['Node.js', 'Playwright', 'OBS WebSocket', 'SVG'],
-    period: '2026',
-    challenges:
-      'Criar uma identidade com clima de GTA sem usar logo nem fonte da Rockstar, e deixar toda a configuração da live reproduzível com um comando.',
-    results:
-      'Mais de 90 artes geradas com um único comando, coleção do OBS com 6 cenas criada automaticamente e autoclipe testado de ponta a ponta.',
-    gradient: 'from-fuchsia-700 via-pink-500 to-amber-400',
-  },
-  {
-    id: 'clube-de-bolso',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgClubeDeBolso,
-    title: 'Clube de Bolso',
-    summary: 'Jogo desktop de gestão de um clube de futebol amador.',
-    description:
-      'Jogo de gestão onde o jogador assume um pequeno clube de futebol de bairro — monta o elenco, cuida das finanças e tenta fazer o clube crescer, um domingo de cada vez.',
-    category: 'Desenvolvimento',
-    tags: ['Tauri', 'React', 'TypeScript'],
-    period: '2026',
-    challenges:
-      'Simular uma temporada inteira de futebol amador de forma simples e divertida, com um instalador desktop de verdade.',
-    results:
-      'Jogo completo com instalador para Windows (Tauri), testes automatizados e fluxo de criação de personagem/clube funcional.',
-    gradient: 'from-blue-600 via-indigo-500 to-violet-500',
-  },
-  {
-    id: 'na-varzea-unity',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgNaVarzeaUnity,
-    title: 'Na Várzea — Unity',
-    summary: 'Porte em Unity 6 URP, com arte própria.',
-    description:
-      'Reconstrução de Na Várzea em Unity 6 (URP), com pipeline de arte própria — modelagem em Blender exportada para um kit de personagens e cenário customizado.',
-    category: 'Desenvolvimento',
-    tags: ['Unity 6 URP', 'C#', 'Blender'],
-    period: '2026',
-    challenges:
-      'Criar um pipeline de arte 3D original (não genérica) do zero, do Blender até o kit de personagens usado no jogo.',
-    results:
-      'Campo de futebol e casas do bairro totalmente modelados e integrados ao jogo, com pipeline de exportação Blender → Unity documentado e repetível.',
-    gradient: 'from-green-600 via-lime-500 to-yellow-400',
-  },
-  {
-    id: 'muddy-sundays',
-    group: 'desenvolvimento',
-    subgroup: 'jogos',
-    image: imgMuddySundays,
-    title: 'Muddy Sundays',
-    summary: 'Sunday League inglês em pixel art: monte o time, suba de divisão.',
-    description:
-      'Jogo de gestão de futebol amador ambientado no interior da Inglaterra, em pixel art: o jogador assume um time de domingo (Sunday League) sem rede nos gols e tenta subir da Division Four até a Premier.',
-    category: 'Desenvolvimento',
-    tags: ['Tauri', 'React', 'Canvas'],
-    period: '2026',
-    challenges:
-      'Simular o mundo do jogo continuamente (inclusive com o jogo fechado, via simulação de partidas de domingo) mantendo a sensação de um lugar vivo.',
-    results:
-      'Mundo em pixel art navegável, narrativa de abertura completa e instalador próprio para Windows.',
-    gradient: 'from-emerald-700 via-green-600 to-lime-500',
-  },
-  {
     id: 'shotgun-nightmare',
     group: 'desenvolvimento',
     subgroup: 'jogos',
     image: imgShotgunNightmare,
     title: 'Shotgun Nightmare',
-    summary: 'FPS de terror em Unity 6, com tudo gerado por código.',
+    summary: 'FPS de terror sem nenhum asset pronto: modelos, texturas e sons saem do código.',
     description:
       'Jogo de tiro em primeira pessoa num hospital abandonado, com uma escopeta cinematográfica (câmera lenta no tiro final) e três tipos de criatura. Não usa assets prontos: modelos, texturas e sons são gerados por código e a fase é montada em tempo de execução.',
     category: 'Desenvolvimento',
@@ -836,22 +825,58 @@ export const projects: Project[] = [
     gradient: 'from-red-800 via-red-700 to-stone-800',
   },
   {
-    id: 'roda-de-bobo',
+    id: 'na-varzea-unity',
     group: 'desenvolvimento',
     subgroup: 'jogos',
-    image: imgRodaDeBobo,
-    title: 'Roda de Bobo — Jogos de Auditório Online',
-    summary: '36 minigames de auditório para jogar com amigos, no PC ou no celular.',
+    image: imgNaVarzeaUnity,
+    title: 'Na Várzea — Unity',
+    summary: 'Um bairro de futebol de várzea em 3D, com arte própria do Blender até o jogo.',
     description:
-      'Site multiplayer inspirado nos quadros do programa Roda de Bobo (CazéTV): alguém cria a sala, manda o link e todos sentam numa mesa virtual com avatares que mexem a boca quando a pessoa fala. São 36 jogos (quiz, palpites, blefe, mímica, desenho ao vivo, futebol) com milhares de perguntas e desafios.',
+      'Jogo de futebol de várzea em Unity 6 (URP), com pipeline de arte própria: modelagem em Blender exportada para um kit de personagens e cenário customizado.',
     category: 'Desenvolvimento',
-    tags: ['Node.js', 'WebSocket', 'JavaScript'],
+    tags: ['Unity 6 URP', 'C#', 'Blender'],
     period: '2026',
     challenges:
-      'Servidor que guarda os segredos de cada jogo e manda para cada jogador só o que ele pode ver, sem repetir conteúdo dentro da mesma sala.',
+      'Criar do zero um pipeline de arte 3D original, do Blender até o kit de personagens usado no jogo.',
     results:
-      'Publicado na nuvem com deploy a cada atualização, Modo Programa com placar da noite, robôs para testar sem amigos e mais de 80 testes automatizados de regras e conteúdo.',
-    gradient: 'from-indigo-700 via-purple-600 to-amber-400',
+      'Campo de futebol e casas do bairro modelados e integrados ao jogo, com exportação Blender → Unity documentada e repetível.',
+    gradient: 'from-green-600 via-lime-500 to-yellow-400',
+  },
+  {
+    id: 'cat-quest',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgCatQuest,
+    title: 'Cat Quest',
+    summary: 'Jogo de cuidar de gatos dentro do navegador, 100% offline e sem coletar dados.',
+    description:
+      'Extensão para Chrome com 7 gatos e 6 ambientes para desbloquear, 3 minigames, nível e XP, missões diárias e progresso salvo localmente, sem servidor, sem cadastro e sem coleta de dados.',
+    category: 'Desenvolvimento',
+    tags: ['React', 'TypeScript', 'Vite', 'Chrome Extension'],
+    period: '2026',
+    challenges:
+      'Manter toda a lógica do jogo isolada e testável, sem depender de React nem da API do Chrome, incluindo o progresso que acontece enquanto o jogo está fechado.',
+    results:
+      '62 testes automatizados cobrindo o motor do jogo e pacote final em torno de 6 MB após otimizar as imagens.',
+    gradient: 'from-pink-500 via-rose-400 to-orange-300',
+  },
+  {
+    id: 'stop-extension',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgStopExtension,
+    title: 'STOP!',
+    summary: 'STOP contra um bot, com um Desafio do Dia que é igual para todo mundo.',
+    description:
+      'Jogo completo de STOP (Adedonha) para um jogador, com 14 categorias, categorias personalizadas, modo Turbo, Desafio do Dia com semente fixa (igual para todo mundo no mesmo dia) e um bot local com 4 níveis de dificuldade.',
+    category: 'Desenvolvimento',
+    tags: ['JavaScript', 'ES Modules', 'Chrome Extension'],
+    period: '2026',
+    challenges:
+      'Construir a validação automática das respostas (acentos, banco de palavras) e a pontuação sem nenhuma dependência externa.',
+    results:
+      '59 testes automatizados, 100% offline (nenhum dado sai do navegador) e lógica do jogo separada da interface.',
+    gradient: 'from-lime-500 via-emerald-500 to-teal-500',
   },
 ];
 

@@ -1,14 +1,15 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { projects, type Project, type ProjectCategory } from '../config/profile';
+import { devThemes, projects, type Project, type ProjectCategory } from '../config/profile';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import Reveal from './Reveal';
 
 const workProjects = projects.filter((p) => p.group === 'trabalho');
 const devProjects = projects.filter((p) => p.group === 'desenvolvimento');
-const devProducts = devProjects.filter((p) => p.subgroup === 'produtos');
-const devGames = devProjects.filter((p) => p.subgroup === 'jogos');
+const devGroups = devThemes
+  .map((theme) => ({ ...theme, list: devProjects.filter((p) => p.subgroup === theme.id) }))
+  .filter((g) => g.list.length > 0);
 
 /** Categorias realmente presentes num grupo, na ordem em que aparecem — evita
  * mostrar um filtro pill ("Educação", "Comercial"...) que não tem nada atrás. */
@@ -130,25 +131,26 @@ export default function Projects() {
               Por conta própria
             </span>
             <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-(--text-primary) sm:text-3xl">
-              Projetos de desenvolvimento.
+              Simulação, educação e IA aplicada.
             </h3>
+            <p className="mt-4 text-sm leading-relaxed text-(--text-secondary) sm:text-base">
+              Fora do trabalho, eu construo o que gostaria de usar: multidões simuladas em tempo
+              real, uma fazenda que ensina gestão, aulas que parecem jogo e câmeras que contam o que
+              veem.
+            </p>
           </Reveal>
 
-          <Reveal delay={0.05} className="mb-5">
-            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">
-              Produtos &amp; Ferramentas
-            </span>
-          </Reveal>
-          <div className="mb-12">
-            <ProjectGrid list={devProducts} onOpen={setSelectedProject} idPrefix="produtos" />
-          </div>
-
-          <Reveal delay={0.05} className="mb-5">
-            <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">
-              Jogos
-            </span>
-          </Reveal>
-          <ProjectGrid list={devGames} onOpen={setSelectedProject} idPrefix="jogos" />
+          {devGroups.map((g) => (
+            <div key={g.id} className="mb-14 last:mb-0">
+              <Reveal delay={0.05} className="mb-5">
+                <span className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">
+                  {g.title}
+                </span>
+                <p className="mt-1.5 text-sm text-(--text-tertiary)">{g.intro}</p>
+              </Reveal>
+              <ProjectGrid list={g.list} onOpen={setSelectedProject} idPrefix={g.id} />
+            </div>
+          ))}
         </div>
       </div>
 

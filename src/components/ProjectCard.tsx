@@ -39,12 +39,6 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
           </>
         )}
 
-        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/0 to-black/0 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <p className="translate-y-2 text-xs text-white/85 transition-transform duration-300 group-hover:translate-y-0">
-            {project.summary}
-          </p>
-        </div>
-
         <span className="absolute right-4 top-4 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-black/30 text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           <ArrowUpRight className="h-4 w-4" />
         </span>
@@ -61,6 +55,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
         <h3 className="mt-1.5 font-display text-lg font-semibold text-(--text-primary)">
           {project.title}
         </h3>
+        <p className="mt-2 text-sm leading-relaxed text-(--text-secondary)">{project.summary}</p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           {project.tags.slice(0, 3).map((tag) => (
             <span

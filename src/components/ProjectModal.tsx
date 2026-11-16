@@ -58,7 +58,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {project.image ? (
                 <img
                   src={project.image}
-                  alt={`Captura de tela de ${project.title}`}
+                  alt={`${project.illustrativeImage ? 'Imagem ilustrativa' : 'Captura de tela'} de ${project.title}`}
                   loading="lazy"
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover object-top"

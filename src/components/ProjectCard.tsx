@@ -23,7 +23,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
         {project.image ? (
           <img
             src={project.image}
-            alt={`Captura de tela de ${project.title}`}
+            alt={`${project.illustrativeImage ? 'Imagem ilustrativa' : 'Captura de tela'} de ${project.title}`}
             loading="lazy"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"

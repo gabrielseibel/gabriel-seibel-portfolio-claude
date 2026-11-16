@@ -20,6 +20,14 @@ import imgMeuPrimeiroWindows from '../assets/projects/meu-primeiro-windows.webp'
 import imgClubeDeBolso from '../assets/projects/clube-de-bolso.webp';
 import imgNaVarzeaUnity from '../assets/projects/na-varzea-unity.webp';
 import imgMuddySundays from '../assets/projects/muddy-sundays.webp';
+import imgShotgunNightmare from '../assets/projects/shotgun-nightmare.webp';
+import imgVehicleAnalytics from '../assets/projects/vehicle-analytics.webp';
+import imgRadarIa from '../assets/projects/radar-ia.webp';
+import imgOfficePlayground from '../assets/projects/office-playground.webp';
+import imgPortalAr from '../assets/projects/portal-ar.webp';
+import imgGestos from '../assets/projects/gestos.webp';
+import imgSeibelTv from '../assets/projects/seibeltv.webp';
+import imgRodaDeBobo from '../assets/projects/roda-de-bobo.webp';
 import {
   Users,
   Target,
@@ -391,6 +399,7 @@ export interface Project {
   results: string;
   gradient: string; // classes tailwind para o "cover" quando não há print real
   image?: string; // screenshot real do projeto, quando existe
+  illustrativeImage?: boolean; // true quando `image` é foto de banco de imagens, não print do projeto
   link?: string;
   githubLink?: string;
 }
@@ -568,6 +577,8 @@ export const projects: Project[] = [
     id: 'vehicle-analytics',
     group: 'desenvolvimento',
     subgroup: 'produtos',
+    image: imgVehicleAnalytics,
+    illustrativeImage: true,
     title: 'Análise de Tráfego — Contagem de Veículos',
     summary: 'Sistema de visão computacional para contagem e classificação de veículos em tempo real.',
     description:
@@ -604,6 +615,7 @@ export const projects: Project[] = [
     group: 'desenvolvimento',
     subgroup: 'produtos',
     image: imgStoreVision,
+    illustrativeImage: true,
     title: 'Store Vision Analytics',
     summary: 'Contagem de ocupação de loja em tempo real por câmera.',
     description:
@@ -622,6 +634,7 @@ export const projects: Project[] = [
     group: 'desenvolvimento',
     subgroup: 'produtos',
     image: imgPlantationVision,
+    illustrativeImage: true,
     title: 'Plantation Vision Analytics',
     summary: 'Detecção de plantas, pragas e doenças por câmera em lavoura.',
     description:
@@ -652,6 +665,103 @@ export const projects: Project[] = [
     results:
       'Aplicativo instalável funcional com narração por voz, testes automatizados (Playwright) e instalador próprio para Windows.',
     gradient: 'from-sky-500 via-blue-400 to-indigo-400',
+  },
+  {
+    id: 'radar-ia',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgRadarIa,
+    title: 'Radar IA',
+    summary: 'Minha consultoria de IA aplicada para PMEs, com diagnóstico gratuito online.',
+    description:
+      'Site da minha consultoria em IA aplicada para pequenas e médias empresas. O centro é um diagnóstico de 12 perguntas que mede o potencial de uso de IA em seis frentes da operação (rotinas, atendimento, documentos, operação, dados e pessoas), mostra o nível da empresa comparado ao porte e gera um resultado que pode ser compartilhado por link.',
+    category: 'Desenvolvimento',
+    tags: ['React 19', 'TypeScript', 'Tailwind 4', 'Vitest'],
+    period: '2026',
+    challenges:
+      'Transformar a oferta de consultoria em algo que a empresa testa sozinha em 3 minutos, com recomendações práticas e dados de mercado conferidos na fonte (Cetic, IBGE, Sebrae, Eurostat).',
+    results:
+      'Site no ar com deploy automático, pontuação coberta por testes, resultado compartilhável e contato pelo WhatsApp já com o resumo do diagnóstico.',
+    gradient: 'from-emerald-700 via-teal-600 to-emerald-500',
+    link: 'https://gabrielseibel.github.io/radar-ia/',
+    githubLink: 'https://github.com/gabrielseibel/radar-ia',
+  },
+  {
+    id: 'office-playground',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgOfficePlayground,
+    title: 'Office Playground',
+    summary: 'Plataforma para aprender Word, Excel e PowerPoint brincando.',
+    description:
+      'Site educativo com laboratórios interativos que imitam o Word, o Excel e o PowerPoint, arcade de minigames, trilha de aprendizagem com XP e conquistas, e as aulas do curso de Informática Essencial (inclusive o módulo de redes). Funciona sem login nem cadastro.',
+    category: 'Desenvolvimento',
+    tags: ['Next.js', 'React', 'Tailwind', 'Framer Motion'],
+    period: '2026',
+    challenges:
+      'Recriar a sensação dos programas do Office dentro do navegador, leve o bastante para rodar em computadores simples de sala de aula.',
+    results:
+      'Publicado no GitHub Pages, com laboratórios de Word, Excel e PowerPoint, sala de aula, desafio mestre e guias por unidade curricular.',
+    gradient: 'from-blue-600 via-emerald-500 to-orange-400',
+    link: 'https://gabrielseibel.github.io/office-playground/',
+    githubLink: 'https://github.com/gabrielseibel/office-playground',
+  },
+  {
+    id: 'portal-ar',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgPortalAr,
+    title: 'PORTAL — Realidade Aumentada',
+    summary: 'Mundos 3D em realidade aumentada que abrem no navegador do celular.',
+    description:
+      'Experiência WebAR feita com Three.js: o celular abre um portal para mundos em miniatura que dá para explorar, com descobertas escondidas. O mundo mais recente, Fazenda da Duda, é um vale inteiro (fazenda, vila com praça, rio, praia e montanhas) com texturas pintadas geradas por código, montado em volta do modelo 3D de uma casa de fazenda.',
+    category: 'Desenvolvimento',
+    tags: ['Three.js', 'WebXR', 'TypeScript', 'Blender'],
+    period: '2026',
+    challenges:
+      'Funcionar em qualquer celular: com WebXR onde ele existe e, nos outros aparelhos, com câmera e giroscópio, sem precisar de marcador impresso.',
+    results:
+      'No ar no GitHub Pages, com três mundos (Fantasia, Vale Alecrim e Fazenda da Duda) e 41 testes ponta a ponta cobrindo abertura, exploração e descobertas.',
+    gradient: 'from-sky-600 via-emerald-500 to-amber-400',
+    link: 'https://gabrielseibel.github.io/portal-ar/',
+    githubLink: 'https://github.com/gabrielseibel/portal-ar',
+  },
+  {
+    id: 'gestos',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgGestos,
+    illustrativeImage: true,
+    title: 'Gestos — Windows por Gestos de Mão',
+    summary: 'Controle do computador com gestos de mão pela webcam.',
+    description:
+      'App em Python que lê os 21 pontos da mão pela webcam (MediaPipe) e transforma gestos em comandos do Windows: arrastar a mão aberta avança ou volta (slides, abas, músicas), o polegar para cima ou para baixo muda o volume, o indicador move o mouse e a pinça clica e arrasta.',
+    category: 'Desenvolvimento',
+    tags: ['Python', 'MediaPipe', 'OpenCV'],
+    period: '2026',
+    challenges:
+      'Deixar o cursor firme quando a mão está parada e sem atraso quando ela se move (filtro One Euro), evitando cliques acidentais.',
+    results:
+      '8 gestos com 5 modos de navegação, modo de simulação que só mostra o que faria e testes automatizados com mãos sintéticas.',
+    gradient: 'from-zinc-700 via-neutral-600 to-zinc-500',
+  },
+  {
+    id: 'seibeltv',
+    group: 'desenvolvimento',
+    subgroup: 'produtos',
+    image: imgSeibelTv,
+    title: 'SeibelTV — Marca e Automação de Lives',
+    summary: 'Identidade visual e automação completa para um canal de lives.',
+    description:
+      'Kit de marca do meu canal de lives, todo gerado por código: logo, banners para Twitch, YouTube, Kick e TikTok, telas animadas e alertas. Inclui scripts que configuram o OBS sozinhos (cenas horizontais e verticais, perfil de transmissão, multistream) e um autoclipe que salva clipes verticais a partir do chat, de raids ou de um grito no microfone.',
+    category: 'Desenvolvimento',
+    tags: ['Node.js', 'Playwright', 'OBS WebSocket', 'SVG'],
+    period: '2026',
+    challenges:
+      'Criar uma identidade com clima de GTA sem usar logo nem fonte da Rockstar, e deixar toda a configuração da live reproduzível com um comando.',
+    results:
+      'Mais de 90 artes geradas com um único comando, coleção do OBS com 6 cenas criada automaticamente e autoclipe testado de ponta a ponta.',
+    gradient: 'from-fuchsia-700 via-pink-500 to-amber-400',
   },
   {
     id: 'clube-de-bolso',
@@ -711,18 +821,37 @@ export const projects: Project[] = [
     id: 'shotgun-nightmare',
     group: 'desenvolvimento',
     subgroup: 'jogos',
+    image: imgShotgunNightmare,
     title: 'Shotgun Nightmare',
-    summary: 'FPS de terror procedural em Unity 6 URP.',
+    summary: 'FPS de terror em Unity 6, com tudo gerado por código.',
     description:
-      'Jogo de tiro em primeira pessoa com geração procedural de ambientes de terror, construído em Unity 6 com o pipeline URP.',
+      'Jogo de tiro em primeira pessoa num hospital abandonado, com uma escopeta cinematográfica (câmera lenta no tiro final) e três tipos de criatura. Não usa assets prontos: modelos, texturas e sons são gerados por código e a fase é montada em tempo de execução.',
     category: 'Desenvolvimento',
-    tags: ['Unity 6 URP', 'C#'],
+    tags: ['Unity 6 URP', 'C#', 'IA de inimigos'],
     period: '2026',
     challenges:
-      'Gerar ambientes de terror proceduralmente mantendo iluminação e ritmo de jogo consistentes a cada execução.',
+      'Fazer a lanterna e o clarão da arma iluminarem o ambiente sem estourar a própria arma de branco, e dar peso à escopeta (coice, recarga cartucho a cartucho, hitstop).',
     results:
-      'Build Windows funcional, com rotinas automatizadas de autoteste e teste de "sensação" (feel test) do jogo.',
+      'Build para Windows com piloto automático que joga a fase inteira, testa pausa e reinício e tira prints de cada etapa (a imagem deste card saiu dele).',
     gradient: 'from-red-800 via-red-700 to-stone-800',
+  },
+  {
+    id: 'roda-de-bobo',
+    group: 'desenvolvimento',
+    subgroup: 'jogos',
+    image: imgRodaDeBobo,
+    title: 'Roda de Bobo — Jogos de Auditório Online',
+    summary: '36 minigames de auditório para jogar com amigos, no PC ou no celular.',
+    description:
+      'Site multiplayer inspirado nos quadros do programa Roda de Bobo (CazéTV): alguém cria a sala, manda o link e todos sentam numa mesa virtual com avatares que mexem a boca quando a pessoa fala. São 36 jogos (quiz, palpites, blefe, mímica, desenho ao vivo, futebol) com milhares de perguntas e desafios.',
+    category: 'Desenvolvimento',
+    tags: ['Node.js', 'WebSocket', 'JavaScript'],
+    period: '2026',
+    challenges:
+      'Servidor que guarda os segredos de cada jogo e manda para cada jogador só o que ele pode ver, sem repetir conteúdo dentro da mesma sala.',
+    results:
+      'Publicado na nuvem com deploy a cada atualização, Modo Programa com placar da noite, robôs para testar sem amigos e mais de 80 testes automatizados de regras e conteúdo.',
+    gradient: 'from-indigo-700 via-purple-600 to-amber-400',
   },
 ];
 
